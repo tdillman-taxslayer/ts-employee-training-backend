@@ -62,5 +62,31 @@
             "name": "Testing",
             "description": "Dynamic verification that a program or system exhibits expected behaviors, performed by executing software to detect defects and evaluate features."
         }
+    ],
+    "career-levels": [
+        {
+            "level": 1,
+            "title": "Software Developer",
+            "completion": "The professional who has completed Level 1 has some background in software development. This person generally has completed a formal education in a software-related discipline, has minimal professional experience, or both. This person is capable of performing work in selected areas with minimal supervision.",
+            "objective": "Introductory capability in all KAs; Competence in 2 KAs."
+        },
+        {
+            "level": 2,
+            "title": "Senior Software Developer",
+            "completion": "The professional who has completed Level 2 has a fairly strong background in software development and can work independently as needed. This person is expected to be a strong contributor within selected areas on their own teams and is beginning to provide leadership within their own teams. This person has worked multiple completed projects and has experience in each of the basic software development lifecycle steps needed to release a product.",
+            "objective": "Introductory capability in all KAs; Competence in 4 KAs; Leadership in 1 KA."
+        },
+        {
+            "level": 3,
+            "title": "Principle Software Developer",
+            "completion": "The professional who has completed Level 3 has consistently had “wins” during his or her participation in all aspects of small and large projects and has been essential to those projects’ successes. This person has a track record of consistently rendering clear technical judgment and routinely considering project-level issues. This person often provides leadership to others within their own teams and is beginning to provide leadership to the larger organization",
+            "objective": "Introductory capability in all KAs; Competence in 6 KAs; Leadership in 2 KAs."
+        }, 
+        {
+            "level": 3,
+            "title": "Software Technical Manager", 
+            "completion": "The professional who has completed Level 3 has consistently had “wins” during his or her participation in all aspects of small and large projects and has been essential to those projects’ successes. This person has a track record of consistently rendering clear technical judgment and routinely considering project-level issues. This person often provides leadership to others within their own teams and is beginning to provide leadership to the larger organization.",
+            "objective": "Introductory capability in all KAs; Competence in 8 KAs; Leadership in 2 KAs."
+        }
     ] 
 }
