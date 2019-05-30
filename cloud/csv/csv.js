@@ -1,8 +1,11 @@
 const request = require('request-promise');
 const Parse = require('parse/node');
 
+console.log(Parse);
+
+
 const options = {
-    uri: './SampleData.csv',
+    uri: '', // hard and relative paths don't work
     resolveWithFullResponse: true,
     encoding: null
 }
@@ -18,3 +21,4 @@ request(options).then((response) => {
     console.log(file.uri())
 
 })).catch(console.error);
+``

@@ -1,8 +1,11 @@
 'use strict';var request = require('request-promise');
 var Parse = require('parse/node');
 
+console.log(Parse);
+
+
 var options = {
-    uri: './SampleData.csv',
+    uri: '', // hard and relative paths don't work
     resolveWithFullResponse: true,
     encoding: null
 
@@ -18,3 +21,4 @@ var options = {
     console.log(file.uri());
 
 }).catch(console.error);
+'';
