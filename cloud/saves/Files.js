@@ -10,13 +10,9 @@ Parse.Cloud.afterSave('File', async req => {
     console.log(objects);
     for (var i = 0; i < objects.length; i++) {
         // spawn new parse object
-        let newLibraryItem = new Parse.Object('Library2');
+        let newLibraryItem = new Parse.Object('Library');
         let item = objects[i];
-        newLibraryItem.set('file', {
-            __type: "Pointer",
-            className: "File",
-            objectId: req.object.id
-        });
+        newLibraryItem.set('file', req.object);
         Object.keys(item).forEach(key => {
             newLibraryItem.set(key, item[key]);
         });
@@ -51,7 +47,7 @@ Parse.Cloud.afterSave('File', async req => {
 
     // json object to Parse library 
     if (!u) {
-        var library = new Parse.Object('Library2');
+        var library = new Parse.Object('Library');
 
         // Objects replacing jsoncsv 
         objects.forEach((x) => {
@@ -76,7 +72,7 @@ Parse.Cloud.afterSave('File', async req => {
             const element = arr[i];
 
             const xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "http://localhost:1337/parse/classes/Library2", true);
+            xhttp.open("POST", "http://localhost:1337/parse/classes/Library", true);
             xhttp.setRequestHeader("X-Parse-Application-id", "your_app_id");
             xhttp.setRequestHeader("X-Parse-REST-API-Key", "client_key");
             xhttp.setRequestHeader("Content-Type", "application/json");
