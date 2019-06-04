@@ -23,6 +23,7 @@ var options = {
     appId: config.PARSE_APP_ID,
     masterKey: config.PARSE_MASTER_KEY,
     serverURL: config.PARSE_SERVER_URL,
+    publicServerURL: config.PARSE_SERVER_URL, // IMPORTANT!
     clientKey: config.PARSE_CLIENT_KEY,
     javascriptKey: config.PARSE_CLIENT_KEY,
     restAPIKey: config.PARSE_CLIENT_KEY
@@ -52,8 +53,7 @@ var api = new ParseServer(options);
 // supportedPushLocales added due to this issue: https://github.com/parse-community/parse-dashboard/issues/811
 // waiting for fix to upgrade to newest package
 var dashboard = new ParseDashboard({
-    apps: [
-    {
+    apps: [{
         serverURL: config.PARSE_SERVER_URL,
         appId: config.PARSE_APP_ID,
         masterKey: config.PARSE_MASTER_KEY,
@@ -62,12 +62,9 @@ var dashboard = new ParseDashboard({
         clientKey: config.PARSE_CLIENT_KEY,
         supportedPushLocales: [] }],
 
-
-    users: [
-    {
+    users: [{
         user: config.PARSE_ADMIN_USERNAME,
         pass: config.PARSE_ADMIN_PASSWORD }] },
-
 
 {
     allowInsecureHTTP: true });

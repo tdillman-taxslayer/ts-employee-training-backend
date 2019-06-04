@@ -28,27 +28,19 @@ Parse.Cloud.beforeSave(Parse.User, function (request) {
 
 
 Parse.Cloud.afterSave(Parse.User, async function (req) {
-    console.log(req);
-    console.log(req.object);
-
     // Init new employee 
     var query = new Parse.Query("Employee");
-    console.log(query);
 
     query.equalTo("Owner", req.object);
     var u = await query.first({
         useMasterKey: true });
 
 
-    // const usrquery = new Parse.Query(Parse.User);
-    // const usr = await usrquery.get();
-    // let usr = usrquery.get("objectId", req.object);
-    // console.log(usr);
-
-
     if (!u) {
         var newEmployee = new Parse.Object("Employee");
         newEmployee.set("Owner", req.object);
+        newEmployee.set("firstName", req.object.attributes.firstName);
+        newEmployee.set("lastName", req.object.attributes.lastName);
         await newEmployee.save({}, {
             useMasterKey: true });
 
@@ -58,6 +50,7 @@ Parse.Cloud.afterSave(Parse.User, async function (req) {
     rquery.equalTo("name", "employee");
     var employeeRole = await rquery.first({
         useMasterKey: true });
+
 
     employeeRole.relation("users").add(req.object);
     await employeeRole.save({}, {
