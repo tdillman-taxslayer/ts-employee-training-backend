@@ -23,52 +23,49 @@ const options = {
     appId: config.PARSE_APP_ID,
     masterKey: config.PARSE_MASTER_KEY,
     serverURL: config.PARSE_SERVER_URL,
+    publicServerURL: config.PARSE_SERVER_URL, // IMPORTANT!
     clientKey: config.PARSE_CLIENT_KEY,
     javascriptKey: config.PARSE_CLIENT_KEY,
-    restAPIKey: config.PARSE_CLIENT_KEY,
-//     push: {
-//         ios: [
-//             //create and support both sandbox and production
-//             {
-//                 pfx:sandboxDirectoryLocation,
-//                 passphrase: config.APNS_PASSPHRASE,
-//                 bundleId: config.APPLE_BUNDLE_ID,
-//                 production: false
-//             },
+    restAPIKey: config.PARSE_CLIENT_KEY,
+    //     push: {
+    //         ios: [
+    //             //create and support both sandbox and production
+    //             {
+    //                 pfx:sandboxDirectoryLocation,
+    //                 passphrase: config.APNS_PASSPHRASE,
+    //                 bundleId: config.APPLE_BUNDLE_ID,
+    //                 production: false
+    //             },
 
-//             // issue created on github: https://github.com/parse-community/parse-server/issues/3911
-//             // setting value to true even though its a production cert crashes server
-            
-//             {
-//                 pfx:productionDirectoryLocation,
-//                 passphrase: config.APNS_PASSPHRASE,
-//                 bundleId: config.APPLE_BUNDLE_ID,
-//                 production: false
-//             }
-//         ]
-//     }
+    //             // issue created on github: https://github.com/parse-community/parse-server/issues/3911
+    //             // setting value to true even though its a production cert crashes server
+
+    //             {
+    //                 pfx:productionDirectoryLocation,
+    //                 passphrase: config.APNS_PASSPHRASE,
+    //                 bundleId: config.APPLE_BUNDLE_ID,
+    //                 production: false
+    //             }
+    //         ]
+    //     }
 }
 const api = new ParseServer(options);
 // supportedPushLocales added due to this issue: https://github.com/parse-community/parse-dashboard/issues/811
 // waiting for fix to upgrade to newest package
 const dashboard = new ParseDashboard({
-    apps: [
-        {
-            serverURL: config.PARSE_SERVER_URL,
-            appId: config.PARSE_APP_ID,
-            masterKey: config.PARSE_MASTER_KEY,
-            appName: config.PARSE_DASHBOARD_APP_NAME,
-            javascriptKey: config.PARSE_CLIENT_KEY,
-            clientKey: config.PARSE_CLIENT_KEY,
-            supportedPushLocales: []
-        }
-    ],
-    users: [
-        {
-            user: config.PARSE_ADMIN_USERNAME,
-            pass: config.PARSE_ADMIN_PASSWORD
-        }
-    ]
+    apps: [{
+        serverURL: config.PARSE_SERVER_URL,
+        appId: config.PARSE_APP_ID,
+        masterKey: config.PARSE_MASTER_KEY,
+        appName: config.PARSE_DASHBOARD_APP_NAME,
+        javascriptKey: config.PARSE_CLIENT_KEY,
+        clientKey: config.PARSE_CLIENT_KEY,
+        supportedPushLocales: []
+    }],
+    users: [{
+        user: config.PARSE_ADMIN_USERNAME,
+        pass: config.PARSE_ADMIN_PASSWORD
+    }]
 }, {
     allowInsecureHTTP: true
 });
