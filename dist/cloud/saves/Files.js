@@ -4,10 +4,11 @@ var parser = require("../csv/csvparser"); // Tim's module
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 // Populate database from csv file 
 Parse.Cloud.afterSave('File', async function (req) {
+    // Once a csv file is uploaded, the data is retrieved, given a base, and transfered to json.
     var contents = await req.object.attributes.file.getData();
     var dataBuffer = new Buffer(contents, 'base64');
-    var objects = parser.parsedToObjects((await parser.parseCSVBuffer(dataBuffer)));
-    console.log(objects);var _loop = async function _loop() {
+    var objects = parser.parsedToObjects((await parser.parseCSVBuffer(dataBuffer)));var _loop = async function _loop() {
+
 
         // spawn new parse object
         var newLibraryItem = new Parse.Object('Library');
@@ -27,56 +28,3 @@ Parse.Cloud.afterSave('File', async function (req) {
 
     }
 });
-
-/*
-        var query = new Parse.Query('Library');
-    
-        query.equalTo("file", req.object);
-        let u = await query.first({
-            useMasterKey: true
-        });
-    
-        // Putting csv to json object. 
-        /*  // let file = fs.readFileSync('../csv/sample.csv'); // request object attribute
-          let file = fs.readFileSync(dataBuffer);
-          let parsed = await parser.parseCSVBuffer(file);
-          let jsoncsv = parser.parsedToObjects(parsed);
-          console.log(jsoncsv); ***
-    
-        var arr = [];
-    
-        // json object to Parse library 
-        if (!u) {
-            var library = new Parse.Object('Library');
-    
-            // Objects replacing jsoncsv 
-            objects.forEach((x) => {
-                let row = {
-                    title: x.title,
-                    url: x.url,
-                    KAT: x.ka,
-                    competency: x.cl,
-                    type: x.type,
-                    file: {
-                        __type: "Pointer",
-                        className: "File",
-                        objectId: req.object.id
-                    }
-                }
-                arr.push(row);
-            })
-    
-            console.log(arr);
-    
-            for (let i = 0; i < arr.length; i++) {
-                const element = arr[i];
-    
-                const xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "http://localhost:1337/parse/classes/Library", true);
-                xhttp.setRequestHeader("X-Parse-Application-id", "your_app_id");
-                xhttp.setRequestHeader("X-Parse-REST-API-Key", "client_key");
-                xhttp.setRequestHeader("Content-Type", "application/json");
-                xhttp.send(JSON.stringify(element));
-            }
-        }
-        */
