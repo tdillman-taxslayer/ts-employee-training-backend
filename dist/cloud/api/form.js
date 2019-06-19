@@ -8,6 +8,8 @@ app.use(_express2.default.json());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 
+var url = "http://localhost:1337/parse";
+
 app.use(function (req, res, next) {
   res.append("Access-Control-Allow-Origin", ["*"]);
   res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -20,11 +22,29 @@ app.post("/data", function (req, res) {
   console.log(req.body);
 
   var xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:1337/parse/users", true);
+  xhttp.open("POST", url + "/users", true);
   xhttp.setRequestHeader("X-Parse-Application-id", "your_app_id");
   xhttp.setRequestHeader("X-Parse-REST-API-Key", "client_key");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(req.body));
+});
+
+app.post("/login", function (req, res) {
+  console.log(req.body);
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open(
+  "GET",
+  url + "/login?username=" + req.body.username + "&password=" + req.body.password,
+  true);
+
+  xhttp.setRequestHeader("X-Parse-Application-id", "your_app_id");
+  xhttp.setRequestHeader("X-Parse-REST-API-Key", "client_key");
+  xhttp.setRequestHeader("X-Parse-Revocable-Session", "1");
+  // const query = `${url}/login?username=${req.body.username}&password=${
+  //   req.body.password
+  // }`;
+  xhttp.send();
 });
 
 app.listen(1300);
