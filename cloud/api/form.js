@@ -47,10 +47,13 @@ app.post("/login", (req, res) => {
     headers: {
       "X-Parse-Application-id": "your_app_id",
       "X-Parse-REST-API-Key": "client_key",
-      "X-Parse-Revocable-Session": "1",
-    },
+      "X-Parse-Revocable-Session": "1"
+    }
   })
-    .then(response => arr.push(response.data.sessionToken))
+    .then(response => {
+      console.log(response);
+      arr.push(response.data.sessionToken);
+    })
     .then(() => console.log(arr))
     .then(() => res.send(arr[0]));
 });
