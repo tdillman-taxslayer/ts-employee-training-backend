@@ -34,33 +34,12 @@ app.post("/data", (req, res) => {
 app.post("/login", (req, res) => {
   console.log(req.body);
 
-  /*
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(
-    "GET",
-    `${url}/login?username=${req.body.username}&password=${req.body.password}`,
-    true
-  );
-  xhttp.setRequestHeader("X-Parse-Application-id", "your_app_id");
-  xhttp.setRequestHeader("X-Parse-REST-API-Key", "client_key");
-  xhttp.setRequestHeader("X-Parse-Revocable-Session", "1");
-  xhttp.responseType = "json";
-  console.log(xhttp.responseText);
-  xhttp.send();
-*/
+  // To hold sessionToken
+  const arr = [];
 
   const query = `${url}/login?username=${req.body.username}&password=${
     req.body.password
   }`;
-  /*
-  fetch(query, {
-    method: "GET",
-    headers: {
-      "X-Parse-Application-id": "your_app_id",
-      "X-Parse-REST-API-Key": "client_key",
-      "X-Parse-Revocable-Session": "1"
-    }
-  }).then(res => console.log(res)); */
 
   axios({
     url: query,
@@ -68,9 +47,12 @@ app.post("/login", (req, res) => {
     headers: {
       "X-Parse-Application-id": "your_app_id",
       "X-Parse-REST-API-Key": "client_key",
-      "X-Parse-Revocable-Session": "1"
-    }
-  }).then(response => console.log(response.data.sessionToken));
+      "X-Parse-Revocable-Session": "1",
+    },
+  })
+    .then(response => arr.push(response.data.sessionToken))
+    .then(() => console.log(arr))
+    .then(() => res.send(arr[0]));
 });
 
 app.listen(1300);
