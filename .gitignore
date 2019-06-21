@@ -1,3 +1,6 @@
+# Build process
+dist 
+
 # Logs
 logs
 *.log
