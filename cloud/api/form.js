@@ -47,15 +47,39 @@ app.post("/login", (req, res) => {
     headers: {
       "X-Parse-Application-id": "your_app_id",
       "X-Parse-REST-API-Key": "client_key",
-      "X-Parse-Revocable-Session": "1"
-    }
+      "X-Parse-Revocable-Session": "1",
+    },
   })
     .then(response => {
-      console.log(response);
+      // console.log(response);
       arr.push(response.data.sessionToken);
     })
     .then(() => console.log(arr))
     .then(() => res.send(arr[0]));
+});
+
+app.post("/session", (req, res) => {
+  console.log(req.body);
+
+  axios({
+    url: `${url}/users/me`,
+    method: "get",
+    headers: {
+      "X-Parse-Application-id": "your_app_id",
+      "X-Parse-REST-API-Key": "client_key",
+      "X-Parse-Session-Token": req.body.token,
+    },
+  }).then(response => {
+    // console.log(response.data);
+    if (response.data.objectId) {
+      res.send({
+        Id: response.data.objectId,
+        auth: "true",
+      });
+    } else {
+      res.send("Not authenticated");
+    }
+  });
 });
 
 app.listen(1300);
