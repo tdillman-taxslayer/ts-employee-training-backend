@@ -53,9 +53,10 @@ app.post("/login", (req, res) => {
     .then(response => {
       // console.log(response);
       arr.push(response.data.sessionToken);
+      arr.push(response.data.objectId);
     })
     .then(() => console.log(arr))
-    .then(() => res.send(arr[0]));
+    .then(() => res.send(arr));
 });
 
 app.post("/session", (req, res) => {
