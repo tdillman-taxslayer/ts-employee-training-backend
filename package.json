@@ -29,7 +29,7 @@
     "node-fetch": "^2.6.0",
     "parse": "^2.4.0",
     "parse-dashboard": "^1.2.0",
-    "parse-server": "^3.3.0",
+    "parse-server": "^4.10.12",
     "path": "^0.12.7",
     "request-promise": "^4.2.4",
     "xmlhttprequest": "^1.8.0"
